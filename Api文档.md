@@ -27,13 +27,9 @@ requestCode：用于启动支付Activity的requestCode，必须>0，在获取支
 参数：
 
 orderId：为此处付款的订单号，该值是接入方下单时的订单号；
-
 requestCode：Activity#onActivityResult()中的参数，用于判断是否由Native支付Activity返回；
-
 resultCode： Activity#onActivityResult()中的参数，用于获取状态；
-
 data : Activity#onActivityResult()中的参数，用于获取状态；
-
 listener ： 用于接收支付结果。
 
 ### 1.4 payBtnClickReport(Activity activity, String mid, String uid)
