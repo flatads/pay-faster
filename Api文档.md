@@ -16,7 +16,7 @@ public boolean isDebugMode();
 ### 1.1 getInstance()
 作用：static方法，获取单例对象。  
 ### 1.2 startPayTransaction(Activity activity, PayOrder payOrder, int requestCode)
-作用：拉起支付在UI线程中调用。  
+作用：拉起支付，在UI线程中调用。  
 参数：  
 Activity：当前Activity，不可为null；   
 PayOrder：用于支付的订单，保证必填参数都已填；   
@@ -40,11 +40,12 @@ mid：分配的唯一值，不可为null；
 uid：用户ID，不可为null；  
 ### 1.5 paySucIssueReport(Activity activity, String mid, String uid, String orderId) 
 作用：事件上报。调用场景在于用户支付或者充值成功后，给用户奖励下发成功时调用，在UI线程中调用。  
+注意：该方法不可给用户短时间内频繁调用。  
 参数：  
 Activity：当前Activity，不可为null；  
 mid：分配的唯一值，不可为null；  
 uid：用户ID，不可为null；  
-orderId：为当前付款的订单号，该值是接入方下单时的订单号，即NPayOrder的m_order_id值。  
+orderId：为当前付款的订单号，该值是接入方下单时的订单号，即PayOrder的m_order_id值。  
 ### 1.6 setDebugMode(boolean isDebug)
 作用：设置Debug状态，在拉起支付前设置或者初始化时设置。  
 参数：  
@@ -83,7 +84,7 @@ void onTranPending(String m_order_id, String errMsg);
 void onPaySuccess(String m_order_id);
 ```
 建议:  
-这里回调成功的情况下，应该再次和服务器确认支付结果后，确保无误，再给用户下发奖励。确保与服务器数据保持一致  
+这里回调成功的情况下，应该再次和服务器确认支付结果后，确认无误，再给用户下发奖励。确保与服务器数据保持一致。  
 ## 3. PayOrder类
 该类为订单类，拉起支付传入订单，类中的必填参数请务必填入  
 ```Java
@@ -99,16 +100,16 @@ private String uid;
 //支付金额，最多小数后两位，必填
 private String payAmount;
 
-//货币单位，默认"INR"，选填
+//货币单位，必填，印度"INR"，印尼"IDR"，填入该国家的货币单位，
 private String unit;
 
-//国家，选填，不填默认 in
+//国家，选填，不填默认 in，非印度国家填入 all
 private String country;
 
-//电话号码，必填
+//电话号码，必填，如果拿不到，填入 7777777777，或者其他10位数字
 private String phoneNumber;
 
-//是否是真实手机号，默认false，请传入true，才有卡包功能
+//是否是真实手机号，默认false，请传入true，才有cashfree的卡包功能，不填
 private boolean isRealPhone;
 
 //回调url，需要回调填入，或填入空字符串，不可为null
@@ -117,13 +118,13 @@ private String callbackUrl;
 //订单名或者产品名，必填
 private String orderName;
 
-//渠道信息，必填
+//渠道信息（如果产品有多个渠道，填入）
 private String channelId;
 
-//已弃用 客户端类型
+//已弃用 客户端类型，不可为null
 private String clientType;
 
-//用户昵称，必填
+//用户昵称，选填
 private String userName;
 
 //邮箱，有就填，建议填入，部分支付要求需要
