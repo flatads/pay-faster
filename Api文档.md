@@ -16,13 +16,13 @@ public boolean isDebugMode();
 ### 1.1 getInstance()
 作用：static方法，获取单例对象。
 ### 1.2 startPayTransaction(Activity activity, PayOrder payOrder, int requestCode)
-作用：拉起支付，在UI线程中调用
+作用：拉起支付，<font color="#dd0000">在UI线程中调用</font>
 参数：
 Activity：当前Activity，不可为null；
 PayOrder：用于支付的订单，保证必填参数都已填；
 requestCode：用于启动支付Activity的requestCode，必须>0，在获取支付结果时需要使用。
 ### 1.3 onActivityResult(String orderId, int requestCode, int resultCode, Intent data, PayServiceListener listener)
-作用：static方法，用于获取支付结果，放在Activity#onActivityResult()中，在UI线程中调用。
+作用：static方法，用于获取支付结果，放在Activity#onActivityResult()中，<font color="#dd0000">在UI线程中调用</font>。
 参数：
 orderId：为此处付款的订单号，该值是接入方下单时的订单号；
 requestCode：Activity#onActivityResult()中的参数，用于判断是否由Native支付Activity返回；
@@ -30,14 +30,14 @@ resultCode： Activity#onActivityResult()中的参数，用于获取状态；
 data : Activity#onActivityResult()中的参数，用于获取状态；
 listener ： 用于接收支付结果。
 ### 1.4 payBtnClickReport(Activity activity, String mid, String uid)
-作用：事件上报。调用场景在于用户点击支付或充值按钮时，调用该方法上报数据，在UI线程中调用。
+作用：事件上报。调用场景在于用户点击支付或充值按钮时，调用该方法上报数据，<font color="#dd0000">在UI线程中调用</font>。
 注意：该方法不可给用户短时间内频繁调用。
 参数：
 Activity：当前Activity，不可为null；
 mid：分配的唯一值，不可为null；
 uid：用户ID，不可为null；
 ### 1.5 paySucIssueReport(Activity activity, String mid, String uid, String orderId)
-作用：事件上报。调用场景在于用户支付或者充值成功后，给用户奖励下发成功时调用，在UI线程中调用。
+作用：事件上报。调用场景在于用户支付或者充值成功后，给用户奖励下发成功时调用，<font color="#dd0000">在UI线程中调用</font>。
 参数：
 Activity：当前Activity，不可为null；
 mid：分配的唯一值，不可为null；
@@ -170,8 +170,8 @@ callBack : 用于接收结果
 获取用户所在国，邦/省位置信息的回调接口
 ```Java
 public interface CallBack {
-	void onSuccess(@Nullable String country, @Nullable String state, @Nullable String city);
+    void onSuccess(@Nullable String country, @Nullable String state, @Nullable String city);
 
-	void onFail(@Nullable String msg);
+    void onFail(@Nullable String msg);
 }
 ```
