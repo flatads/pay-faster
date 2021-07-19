@@ -32,27 +32,27 @@ data : Activity#onActivityResult()中的参数，用于获取状态；
 listener ： 用于接收支付结果。  
 
 ### 1.4 payBtnClickReport(Activity activity, String mid, String uid) 
-作用：事件上报。调用场景在于用户点击支付或充值按钮时，调用该方法上报数据，在UI线程中调用。 
-注意：该方法不可给用户短时间内频繁调用。 
-参数： 
-Activity：当前Activity，不可为null； 
-mid：分配的唯一值，不可为null； 
-uid：用户ID，不可为null； 
+作用：事件上报。调用场景在于用户点击支付或充值按钮时，调用该方法上报数据，在UI线程中调用。   
+注意：该方法不可给用户短时间内频繁调用。  
+参数：  
+Activity：当前Activity，不可为null；  
+mid：分配的唯一值，不可为null；  
+uid：用户ID，不可为null；  
 ### 1.5 paySucIssueReport(Activity activity, String mid, String uid, String orderId) 
-作用：事件上报。调用场景在于用户支付或者充值成功后，给用户奖励下发成功时调用，<font color="#dd0000">在UI线程中调用</font>。
-参数：
-Activity：当前Activity，不可为null；
-mid：分配的唯一值，不可为null；
-uid：用户ID，不可为null；
-orderId：为当前付款的订单号，该值是接入方下单时的订单号，即NPayOrder的m_order_id值。
+作用：事件上报。调用场景在于用户支付或者充值成功后，给用户奖励下发成功时调用，在UI线程中调用。  
+参数：  
+Activity：当前Activity，不可为null；  
+mid：分配的唯一值，不可为null；  
+uid：用户ID，不可为null；  
+orderId：为当前付款的订单号，该值是接入方下单时的订单号，即NPayOrder的m_order_id值。  
 ### 1.6 setDebugMode(boolean isDebug)
-作用：设置Debug状态，在拉起支付前设置或者初始化时设置。
-参数：
-isDebug ：传递boolean值。true代表测试环境，false代表正式环境。
+作用：设置Debug状态，在拉起支付前设置或者初始化时设置。  
+参数：  
+isDebug ：传递boolean值。true代表测试环境，false代表正式环境。  
 ### 1.7 isDebugMode()
-作用：获取当前Debug状态：true代表测试环境，false代表正式环境。
+作用：获取当前Debug状态：true代表测试环境，false代表正式环境。  
 ## 2. PayServiceListener类
-下单支付结果回调接口
+下单支付结果回调接口  
 ```Java
 下单支付回调接口
 /**
@@ -82,10 +82,10 @@ void onTranPending(String m_order_id, String errMsg);
  */
 void onPaySuccess(String m_order_id);
 ```
-建议:
-这里回调成功的情况下，应该再次和服务器确认支付结果后，确保无误，再给用户下发奖励。确保与服务器数据保持一致
+建议:  
+这里回调成功的情况下，应该再次和服务器确认支付结果后，确保无误，再给用户下发奖励。确保与服务器数据保持一致  
 ## 3. PayOrder类
-该类为订单类，拉起支付传入订单，类中的必填参数请务必填入
+该类为订单类，拉起支付传入订单，类中的必填参数请务必填入  
 ```Java
 //分配的mid值，必填
 private String mid;
@@ -133,7 +133,7 @@ private String email;
 private String checksum;
 ```
 ## 4. PayError
-错误码以及错误信息
+错误码以及错误信息  
 ```Java
 public static final int NETWORK_ERROR = 1;  // 网络错误
 public static final int UI_ERROR = 2;       // UI错误
@@ -163,13 +163,13 @@ public void setCode(int code) {
 ```
 ## 5. LocationUtil
 ### 5.1 request(Context context, String mid, CallBack callBack)
-作用：获取用户所在国，邦/省。用于产品对入口进入自行拦截，产品侧通过传输IP地址，支付SDK可以确认用户是否在可以支付的地区进行支付。
-参数：
-context ： 不可为null
-mid : 分配的唯一值，不可为null
-callBack : 用于接收结果
-### 5.2 CallBack
-获取用户所在国，邦/省位置信息的回调接口
+作用：获取用户所在国，邦/省。用于产品对入口进入自行拦截，产品侧通过传输IP地址，支付SDK可以确认用户是否在可以支付的地区进行支付。  
+参数：  
+context ： 不可为null  
+mid : 分配的唯一值，不可为null   
+callBack : 用于接收结果  
+### 5.2 CallBack  
+获取用户所在国，邦/省位置信息的回调接口  
 ```Java
 public interface CallBack {
     void onSuccess(@Nullable String country, @Nullable String state, @Nullable String city);
