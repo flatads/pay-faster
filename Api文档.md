@@ -16,7 +16,7 @@ public boolean isDebugMode();
 ### 1.1 getInstance()
 作用：static方法，获取单例对象。
 ### 1.2 startPayTransaction(Activity activity, PayOrder payOrder, int requestCode)
-作用：拉起支付在UI线程中调用
+作用：拉起支付在UI线程中调用。
 参数：
 Activity：当前Activity，不可为null；
 PayOrder：用于支付的订单，保证必填参数都已填；
@@ -26,7 +26,7 @@ requestCode：用于启动支付Activity的requestCode，必须>0，在获取支
 
 参数：
 
-orderId：为此处付款的订单号，该值是接入方下单时的订单号；
+orderId：为此处付款的订单号，该值是接入方下单时的订单号。
 requestCode：Activity#onActivityResult()中的参数，用于判断是否由Native支付Activity返回；
 resultCode： Activity#onActivityResult()中的参数，用于获取状态；
 data : Activity#onActivityResult()中的参数，用于获取状态；
