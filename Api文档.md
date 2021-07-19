@@ -16,7 +16,7 @@ public boolean isDebugMode();
 ### 1.1 getInstance()
 作用：static方法，获取单例对象。
 ### 1.2 startPayTransaction(Activity activity, PayOrder payOrder, int requestCode)
-作用：拉起支付，<font color="#dd0000">在UI线程中调用</font>
+作用：拉起支付在UI线程中调用
 参数：
 Activity：当前Activity，不可为null；
 PayOrder：用于支付的订单，保证必填参数都已填；
